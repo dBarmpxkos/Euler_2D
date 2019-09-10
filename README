@@ -1,0 +1,32 @@
+The Euler_2D program simulates a shock at Mach 2.95 impacting
+a bubble of lower density than the surrounding air.
+
+Boundary conditions
+-------------------
+
+The top and bottom boundaries are periodic.
+The left and right boundaries are not updated; the initial data is left
+in place and not modified. The default simulation never touches these
+boundaries.
+
+Plotting
+--------
+
+In order to plot the output, use gnuplot:
+
+plot "./shock_bubble.out" using 1:2:3 with image
+
+Parallelisation
+---------------
+
+OpenMP
+------
+
+Consider which loops can be divided up across multiple processors,
+and which data-structures should be processed simultaneously.
+
+MPI
+---
+
+You will need to work out an approach to splitting the data up between
+processes. I suggest you split the data into strips parallel to the x-axis.

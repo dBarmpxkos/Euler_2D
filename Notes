@@ -1,0 +1,10 @@
+1. Run the code with default opt and -O3, extracted the results. Pretty decent.
+g++ Euler_2D.C -o Euler_2D
+end Time = 285.167
+
+g++ Euler_2D.C -o Euler_2D
+end Time = 15.0675
+
+
+2. I copied the codebase into a new file named dissasembled in order to analyze the code flow without actual math.
+For that reason, I replaced all operations and results with the value "1.0".
