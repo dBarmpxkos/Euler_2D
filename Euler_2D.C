@@ -277,7 +277,7 @@ int main(void)
     }
     
     t += dt;
-    std::cout << "T = " << t << std::endl;
+    /* std::cout << "T = " << t << std::endl; */
   }
   
   clock_t end = clock();
