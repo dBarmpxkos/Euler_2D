@@ -189,11 +189,9 @@ std::pair<double, double> X(unsigned int i, unsigned int j)
   return std::make_pair(x,y);
 }
 
-int main(void)
+void init_variables()
 {
-  clock_t start = clock();
-  
-  // User-defined parameters
+	// User-defined parameters
   cellsX = 640;
   double shockSpeed = 2.95;
   double CFL = 0.9;
@@ -221,10 +219,22 @@ int main(void)
   const double uB = (pB - p)/(rho*shockSpeed) + ambient[V_X];
   
   State shockState = {rhoB, uB, 0, pB};
-  
+}
+
+void define_vectors()
+{
   // Set initial data:
   std::vector<State> data(cellsX * cellsY);
   std::vector<State> fluxes(cellsX * cellsY);
+
+}
+
+int main(void)
+{
+  clock_t start = clock();
+    
+  init_variables();
+  define_vectors();
   
   for(unsigned int j=0 ; j < cellsY ; j++)
   {
