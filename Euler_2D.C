@@ -189,10 +189,13 @@ std::pair<double, double> X(unsigned int i, unsigned int j)
   return std::make_pair(x,y);
 }
 
-void init_variables()
+
+int main(void)
 {
-	// User-defined parameters
-  cellsX = 640;
+  clock_t start = clock();
+  
+  // User-defined parameters
+  cellsX = 64;
   double shockSpeed = 2.95;
   double CFL = 0.9;
   
@@ -202,6 +205,7 @@ void init_variables()
   minY = 0;
   maxY = 1.0;
   cellsY = cellsX / (maxX - minX) * (maxY - minY);
+  printf("cellsX: %d\tcellsY: %d", cellsX, cellsY);
   finalT = 0.3;
   
   // Primitive variables
@@ -219,22 +223,10 @@ void init_variables()
   const double uB = (pB - p)/(rho*shockSpeed) + ambient[V_X];
   
   State shockState = {rhoB, uB, 0, pB};
-}
-
-void define_vectors()
-{
+  
   // Set initial data:
   std::vector<State> data(cellsX * cellsY);
   std::vector<State> fluxes(cellsX * cellsY);
-
-}
-
-int main(void)
-{
-  clock_t start = clock();
-    
-  init_variables();
-  define_vectors();
   
   for(unsigned int j=0 ; j < cellsY ; j++)
   {
@@ -246,16 +238,22 @@ int main(void)
       if(x < 0.1)
       {
         u = conservative(shockState);
+        printf("u takes shockState\n");
       }
       else if( sqrt( pow(x-0.4, 2) + pow(y-0.5,2) ) < 0.2 )
       {
         u = conservative(bubbleInterior);
+        printf("u takes bubbleInterior\n");
       }
       else
       {
         u = conservative(ambient);
+        printf("u takes ambient\n");
       }
       data[i + j*cellsX] = u;
+      printf("data[%d] [0]: %d\t[1]: %d\t[2]: %d\t[3]: %d\n", i + j*cellsX, 
+      														  data[i + j*cellsX][0], data[i + j*cellsX][1]
+      														  data[i + j*cellsX][2], data[i + j*cellsX][3]);
     }
   }
   
