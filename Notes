@@ -12,6 +12,34 @@
 	mpicc -fopenmp -std=gnu++11 -O3 -o Euler_2D Euler_2D.C
 	end Time = 25.02
 
+3. OpenMP to the rescue
+First take was to parallelize outer loops with 
+#pragma omp parallel for:
+
+and run for different number of cores:
+2:
+4:
+8:
+16:
+32:
+
+Also, care to check diffs.
+
+4) #pragma omp parallel for collapse(2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 2. I copied the codebase into a new file named dissasembled in order to analyze the code flow without actual math.
 For that reason, I replaced all operations and results with the value "1.0".
 
@@ -26,3 +54,4 @@ For that reason, I replaced all operations and results with the value "1.0".
 	end Time = 0
 	mpicc -fopenmp -std=gnu++11 -O3 -o Dissasembled Dissasembled.C
 	end Time = 0
+	
