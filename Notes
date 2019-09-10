@@ -1,14 +1,28 @@
 1. Run the code with default opt and -O3, extracted the results. Pretty decent.
 
-g++ Euler_2D.C -o Euler_2D
-end Time = 285.167
-g++ -O3 Euler_2D.C -o Euler_2D
-end Time = 15.0675
+	/* local machine */
+	g++ Euler_2D.C -o Euler_2D
+	end Time = 285.167
+	g++ -O3 Euler_2D.C -o Euler_2D
+	end Time = 15.0675
+
+	/* cluster single */
+	mpicc -fopenmp -std=gnu++11 -o Euler_2D Euler_2D.C
+	end Time = 22.93
+	mpicc -fopenmp -std=gnu++11 -O3 -o Euler_2D Euler_2D.C
+	end Time = 25.02
 
 2. I copied the codebase into a new file named dissasembled in order to analyze the code flow without actual math.
 For that reason, I replaced all operations and results with the value "1.0".
 
-g++ Dissasembled.C -o Dissasembled
-end Time = 0.112293
-g++ -O3 Dissasembled.C  -o Dissasembled
-end Time = 0.008381
+	/* local machine */
+	g++ Dissasembled.C -o Dissasembled
+	end Time = 0.112293
+	g++ -O3 Dissasembled.C  -o Dissasembled
+	end Time = 0.008381
+	
+	/* cluster single */
+	mpicc -fopenmp -std=gnu++11 -o Dissasembled Dissasembled.C
+	end Time = 0
+	mpicc -fopenmp -std=gnu++11 -O3 -o Dissasembled Dissasembled.C
+	end Time = 0
