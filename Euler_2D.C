@@ -189,13 +189,12 @@ std::pair<double, double> X(unsigned int i, unsigned int j)
   return std::make_pair(x,y);
 }
 
-
 int main(void)
 {
   clock_t start = clock();
   
   // User-defined parameters
-  cellsX = 64;
+  cellsX = 640;
   double shockSpeed = 2.95;
   double CFL = 0.9;
   
@@ -205,7 +204,6 @@ int main(void)
   minY = 0;
   maxY = 1.0;
   cellsY = cellsX / (maxX - minX) * (maxY - minY);
-  printf("cellsX: %d\tcellsY: %d", cellsX, cellsY);
   finalT = 0.3;
   
   // Primitive variables
@@ -238,22 +236,16 @@ int main(void)
       if(x < 0.1)
       {
         u = conservative(shockState);
-        printf("u takes shockState\n");
       }
       else if( sqrt( pow(x-0.4, 2) + pow(y-0.5,2) ) < 0.2 )
       {
         u = conservative(bubbleInterior);
-        printf("u takes bubbleInterior\n");
       }
       else
       {
         u = conservative(ambient);
-        printf("u takes ambient\n");
       }
       data[i + j*cellsX] = u;
-      printf("data[%d] [0]: %d\t[1]: %d\t[2]: %d\t[3]: %d\n", i + j*cellsX, 
-      														  data[i + j*cellsX][0], data[i + j*cellsX][1]
-      														  data[i + j*cellsX][2], data[i + j*cellsX][3]);
     }
   }
   
@@ -285,7 +277,7 @@ int main(void)
     }
     
     t += dt;
-    /* std::cout << "T = " << t << std::endl; */
+    std::cout << "T = " << t << std::endl;
   }
   
   clock_t end = clock();
